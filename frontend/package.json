@@ -9,6 +9,9 @@
     "lint": "oxlint",
     "preview": "vite preview"
   },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",
     "@react-google-maps/api": "^2.20.8",

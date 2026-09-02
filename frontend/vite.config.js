@@ -1,6 +1,6 @@
+import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
-import { defineConfig } from 'vite'
 import path from 'path'
 
 export default defineConfig({
@@ -12,6 +12,10 @@ export default defineConfig({
   },
   optimizeDeps: {
     include: ['@react-google-maps/api'],
+  },
+  build: {
+    outDir: 'dist',
+    emptyOutDir: true,
   },
   server: {
     port: 5173,
