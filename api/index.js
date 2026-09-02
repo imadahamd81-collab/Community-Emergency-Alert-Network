@@ -1,10 +1,11 @@
+import mongoose from 'mongoose'
 import app from '../backend/src/app.js'
 import connectDB from '../backend/src/config/db.js'
 
 let dbConnected = false
 
 const ensureDB = async () => {
-  if (mongoose?.connection?.readyState >= 1) return
+  if (mongoose.connection.readyState >= 1) return
   if (dbConnected) return
   await connectDB()
   dbConnected = true
