@@ -1,7 +1,7 @@
-import app from './src/app.js'
-import connectDB from './src/config/db.js'
+import app from './app.js'
+import connectDB from './config/db.js'
 import { createServer } from 'http'
-import { initSocket } from './src/config/socket.js'
+import { initSocket } from './config/socket.js'
 
 const PORT = process.env.PORT || 5000
 
