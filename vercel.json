@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "npm install --prefix frontend && npm run build --prefix frontend",
+  "buildCommand": "cd frontend && npm install && npm run build && cd .. && mkdir -p public && cp -r frontend/dist/* public/",
   "installCommand": "npm install --prefix frontend && npm install --prefix backend",
   "framework": null,
   "builds": [
@@ -8,10 +8,5 @@
       "src": "api/index.js",
       "use": "@vercel/node"
     }
-  ],
-  "outputDirectory": "frontend/dist",
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/index.js" },
-    { "src": "/uploads/(.*)", "dest": "/api/index.js" }
   ]
 }
