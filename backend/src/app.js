@@ -32,8 +32,23 @@ const app = express()
 app.use(helmet({
   crossOriginResourcePolicy: false,
 }))
+const allowedOrigins = [
+  process.env.CLIENT_URL,
+  'http://localhost:5173',
+  'http://localhost:3000',
+].filter(Boolean)
+
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true)
+    if (allowedOrigins.includes('*') || allowedOrigins.some(o => origin.startsWith(o.replace(/\/$/, '')))) {
+      return callback(null, true)
+    }
+    if (origin.endsWith('.vercel.app')) {
+      return callback(null, true)
+    }
+    callback(null, true)
+  },
   credentials: true,
 }))
 app.use(compression())
