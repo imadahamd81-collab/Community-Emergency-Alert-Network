@@ -1,0 +1,31 @@
+import express from 'express'
+import { body } from 'express-validator'
+import { register, login, forgotPassword, resetPassword, getMe } from '../controllers/authController.js'
+import { protect } from '../middleware/authMiddleware.js'
+
+const router = express.Router()
+
+router.post('/register', [
+  body('name').notEmpty().withMessage('Name is required'),
+  body('email').isEmail().withMessage('Valid email is required'),
+  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
+  body('phone').notEmpty().withMessage('Phone is required'),
+], register)
+
+router.post('/login', [
+  body('email').isEmail().withMessage('Valid email is required'),
+  body('password').notEmpty().withMessage('Password is required'),
+], login)
+
+router.post('/forgot-password', [
+  body('email').isEmail().withMessage('Valid email is required'),
+], forgotPassword)
+
+router.post('/reset-password', [
+  body('token').notEmpty().withMessage('Token is required'),
+  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
+], resetPassword)
+
+router.get('/me', protect, getMe)
+
+export default router
